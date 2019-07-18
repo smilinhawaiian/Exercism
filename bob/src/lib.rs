@@ -1,45 +1,45 @@
-//Bob answers 'Sure.' if you ask him a question, such as "How are you?".
-//He answers 'Whoa, chill out!' if you YELL AT HIM (in all capitals).
-//He answers 'Calm down, I know what I'm doing!' if you yell a question at him.
-//He says 'Fine. Be that way!' if you address him without actually saying anything.
-//He answers 'Whatever.' to anything else.
-
 pub fn reply(message: &str) -> &str {
-    // CASES:
-    // ignore anything that isn't a capital or lowercase letter
-    // check last char for question mark
-    // check if all chars are capital
+    // RESPONSES:
+    // 0. No Statement == "Fine. Be that way!" //nada
+    // 1. CAPS Question == "Calm down, I know what I'm doing!" //upper && Q
+    // 2. CAPS Statement == "Whoa, chill out!" // upper NO Q
+    // 3. Regular Question == "Sure." //lower && Q
+    // 4. Regular Statement == "Whatever." //lower NO Q
+    let mut question = false;
+    let mut upper = false;
+    let mut lower = false;
+    let mut number = false;
 
-    // RESPONSES: 
-    // 0. No Statement == "Fine. Be that way!"
-    // 1. Regular Statement == "Whatever."
-    // 2. Regular Question == "Sure."
-    // 3. CAPS Statement == "Whoa, chill out!"
-    // 4. CAPS Question == "Calm down, I know what I'm doing!"
-    //
-    //
-    //
-    let mut last_char = ' '; //check for question mark
-    let mut yelling = true; // check for all caps
-    let mut statement = false; // check for words said
-    let mut response = "Whatever.";
-
-    //for ch in message[..].chars() {
     for ch in message[..].as_bytes() {
         match ch {
-            63 => println!("63: {:?}", ch),//last_char = '?',
-            65...90 => println!("65-90: {:?}", ch),
-            97...122 => println!("97-122: {:?}", ch),
-            _ => {println!("everything else .. {:?}", ch)},
+            63 => question = true,
+            48...57 => {
+                number = true;
+                question = false;
+            }
+            65...90 => {
+                upper = true;
+                question = false;
+            }
+            97...122 => {
+                lower = true;
+                question = false;
+            }
+            _ => continue,
         }
-        if yelling == true{
-            yelling = false;
-        }
-        if statement == false {
-            statement = true;
-        }
-        println!("{:?}\n", ch);
     }
 
-    response
+    if question {
+        if !lower && upper {
+            "Calm down, I know what I'm doing!"
+        } else {
+            "Sure."
+        }
+    } else if !lower && upper {
+        "Whoa, chill out!"
+    } else if !lower && !upper && !number {
+        "Fine. Be that way!"
+    } else {
+        "Whatever."
+    }
 }
