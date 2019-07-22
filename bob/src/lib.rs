@@ -1,10 +1,10 @@
+// RESPONSES:
+// 0. No Statement == "Fine. Be that way!" //nada
+// 1. CAPS Question == "Calm down, I know what I'm doing!" //upper && Q
+// 2. CAPS Statement == "Whoa, chill out!" // upper NO Q
+// 3. Regular Question == "Sure." //lower && Q
+// 4. Regular Statement == "Whatever." //lower NO Q
 pub fn reply(message: &str) -> &str {
-    // RESPONSES:
-    // 0. No Statement == "Fine. Be that way!" //nada
-    // 1. CAPS Question == "Calm down, I know what I'm doing!" //upper && Q
-    // 2. CAPS Statement == "Whoa, chill out!" // upper NO Q
-    // 3. Regular Question == "Sure." //lower && Q
-    // 4. Regular Statement == "Whatever." //lower NO Q
     let mut question = false;
     let mut upper = false;
     let mut lower = false;
