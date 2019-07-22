@@ -74,8 +74,9 @@ Note that the list of inputs may vary; your solution should be able to handle li
 _Learning Summary:_  
 *chars - string functions*  
 This exercise took several possible cases into account for the result.
-I used match and if/else blocks, but I know there is a better/
-more efficient solution. 
+I used match and if/else blocks, to check for numbers, letters, and case, 
+but I there may be a better or more efficient solution.   
+https://exercism.io/my/solutions/9120a90cc6aa4f49b26f0f95e0bfd896  
 
 _From Readme:_   
 Bob is a lackadaisical teenager. In conversation, his responses are very limited.
@@ -98,9 +99,35 @@ and always follows normal rules regarding sentence punctuation in English.
 ### Collatz-conjecture  
 _Learning Summary:_  
 *option - math*  
-
+I used mod to figure out if n was odd or even, and a count to keep track
+of the number of steps, while recursively calling the collatz function.    
+https://exercism.io/my/solutions/0d096db6b9604d6099be9afb9c984179  
 
 _From Readme:_   
+The Collatz Conjecture or 3x+1 problem can be summarized as follows:  
+
+Take any positive integer n. If n is even, divide n by 2 to get n / 2. If n is
+odd, multiply n by 3 and add 1 to get 3n + 1. Repeat the process indefinitely.
+The conjecture states that no matter which number you start with, you will
+always reach 1 eventually.  
+
+Given a number n, return the number of steps required to reach 1.  
+
+#### Examples  
+Starting with n = 12, the steps would be as follows:
+
+0. 12
+1. 6
+2. 3
+3. 10
+4. 5
+5. 16
+6. 8
+7. 4
+8. 2
+9. 1
+
+Resulting in 9 steps. So for input n = 12, the return value would be 9.  
 
 
 ### Saddle-points  
@@ -109,6 +136,40 @@ _Learning Summary:_
 
 
 _From Readme:_   
+Detect saddle points in a matrix.
+
+So say you have a matrix like so:
+
+```text
+    1  2  3
+  |---------
+1 | 9  8  7
+2 | 5  3  2     <--- saddle point at column 1, row 2, with value 5
+3 | 6  6  7
+```
+
+It has a saddle point at column 1, row 2.
+
+It's called a "saddle point" because it is greater than or equal to
+every element in its row and less than or equal to every element in
+its column.
+
+A matrix may have zero or more saddle points.
+
+Your code should be able to provide the (possibly empty) list of all the
+saddle points for any given matrix.
+
+The matrix can have a different number of rows and columns (Non square).
+
+Note that you may find other definitions of matrix saddle points online,
+but the tests for this exercise follow the above unambiguous definition.
+
+#### Efficiency Notice  
+This exercise uses a _vector of vectors_ to store the content of matrices. While
+this exercise is designed to help students understand basic concepts about
+vectors, such as indexing, and that nested data types are legal, _vector of
+vectors_ is a suboptimal choice for high-performance matrix algebra and any
+similar efficient processing of larger amounts of data.  
 
 
 ### Isogram  
@@ -117,6 +178,18 @@ _Learning Summary:_
 
 
 _From Readme:_   
+Determine if a word or phrase is an isogram.
+
+An isogram (also known as a "nonpattern word") is a word or phrase without a repeating letter, however spaces and hyphens are allowed to appear multiple times.
+
+Examples of isograms:
+
+- lumberjacks
+- background
+- downstream
+- six-year-old
+
+The word *isograms*, however, is not an isogram, because the s repeats.  
 
 
 ### Say  
@@ -125,7 +198,88 @@ _Learning Summary:_
 
 
 _From Readme:_   
-some  
+Given a number from 0 to 999,999,999,999, spell out that number in English.
+
+#### Step 1
+
+Handle the basic case of 0 through 99.
+
+If the input to the program is `22`, then the output should be
+`'twenty-two'`.
+
+Your program should complain loudly if given a number outside the
+blessed range.
+
+Some good test cases for this program are:
+
+- 0
+- 14
+- 50
+- 98
+- -1
+- 100
+
+##### Extension
+
+If you're on a Mac, shell out to Mac OS X's `say` program to talk out
+loud. If you're on Linux or Windows, eSpeakNG may be available with the command `espeak`.
+
+#### Step 2
+
+Implement breaking a number up into chunks of thousands.
+
+So `1234567890` should yield a list like 1, 234, 567, and 890, while the
+far simpler `1000` should yield just 1 and 0.
+
+The program must also report any values that are out of range.
+
+#### Step 3
+
+Now handle inserting the appropriate scale word between those chunks.
+
+So `1234567890` should yield `'1 billion 234 million 567 thousand 890'`
+
+The program must also report any values that are out of range.  It's
+fine to stop at "trillion".
+
+#### Step 4
+
+Put it all together to get nothing but plain English.
+
+`12345` should give `twelve thousand three hundred forty-five`.
+
+The program must also report any values that are out of range.
+
+##### Extensions
+
+Use _and_ (correctly) when spelling out the number in English:
+
+- 14 becomes "fourteen".
+- 100 becomes "one hundred".
+- 120 becomes "one hundred and twenty".
+- 1002 becomes "one thousand and two".
+- 1323 becomes "one thousand three hundred and twenty-three".
+
+
+#### Rust Specific Exercise Notes
+
+This is slightly changed in the Rust version, compared to other
+language versions of this exercise.  Instead of requiring you to return
+errors for out of range, we are using Rust's strong type system to limit
+input.  It is much easier to make a function deal with all valid inputs,
+rather than requiring the user of your module to handle errors.
+
+There is a -1 version of a test case, but it is commented out.
+If your function is implemented properly, the -1 test case should not compile.
+
+Adding 'and' into number text has not been implemented in test cases.
+
+##### Extension
+
+Add capability of converting up to the max value for u64: 9,223,372,036,854,775,807.
+
+For hints at the output this should have, look at the last test case.  
+
 
 
 ## Writing the Code
