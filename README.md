@@ -101,6 +101,7 @@ _Learning Summary:_
 *option - math*  
 I used mod to figure out if n was odd or even, and a count to keep track
 of the number of steps, while recursively calling the collatz function.    
+For any number less han one, None shouldbe returned.  
 https://exercism.io/my/solutions/0d096db6b9604d6099be9afb9c984179  
 
 _From Readme:_   
@@ -175,12 +176,18 @@ similar efficient processing of larger amounts of data.
 ### Isogram  
 _Learning Summary:_  
 *chars - iterators - strings*  
-
+An Iterator was helpful in this exercise to dissect the input word.  
+I used a HashSet to store and check for duplicate letters.  
+Notes:  
+An empty string is an isogram.  
+Upper and lowercase characters of the same type are considered to be the same letter.  
+https://exercism.io/my/solutions/79fa31189e6742d0ac26fabb40ced6fd  
 
 _From Readme:_   
 Determine if a word or phrase is an isogram.
 
-An isogram (also known as a "nonpattern word") is a word or phrase without a repeating letter, however spaces and hyphens are allowed to appear multiple times.
+An isogram (also known as a "nonpattern word") is a word or phrase without a repeating letter, 
+however spaces and hyphens are allowed to appear multiple times.
 
 Examples of isograms:
 
