@@ -134,7 +134,8 @@ Resulting in 9 steps. So for input n = 12, the return value would be 9.
 ### Saddle-points  
 _Learning Summary:_     
 *iterators - vectors*  
-
+Greatest in the row and smallest in the column
+//
 
 _From Readme:_   
 Detect saddle points in a matrix.
